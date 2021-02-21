@@ -1,0 +1,13 @@
+name: website
+
+website:
+  component: 'website'
+  inputs:
+    code:
+      src: ./src
+      dist: ./dist
+      hook: npm run build
+    bucketName: crs-class-scheduler
+    region: ap-southeast-1
+    # domain: www.serverlessmetrics.com
+
