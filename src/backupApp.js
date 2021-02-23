@@ -29,6 +29,57 @@ const useStyles = makeStyles({
 });
 
 function App() {
+  const [data, setData] = useState([]);
+  const [selectedOption, setSelectedOption] = useState([]);
+  const [myInputValue, setMyInputValue] = useState( "" );
+  const [outputSchedule, setOutputSchedule] = useState( [] );
+
+  useEffect(() => {
+    csv(myfile).then(setData);
+    console.log("Loaded data");
+  }, []);
+
+  var col2 = map(data, function(d){
+    return d.name
+  })
+  console.log("Going here.");
+  console.log(data)
+
+  const filterOptions = (inputValue: string) => {
+    return data.filter( i => 
+      i.label.toLowerCase().includes(inputValue.toLowerCase())
+      );
+  };
+  
+  const promiseOptions = inputValue =>
+    new Promise(resolve => {
+      setTimeout(() => {
+        resolve(filterOptions(inputValue));
+      }, 1000);
+    });
+  
+  function customTheme(theme){
+    return{
+      ... theme,
+      colors:{
+        ...theme.colors
+      }
+    }
+  }
+
+  function generateSchedule()
+  {
+
+    let mything = ["Math 10 " , "Span 10"]
+    axios.get("https://6wyc8n688h.execute-api.ap-southeast-1.amazonaws.com/dev/echo/main", { params: { message: mything } })
+            .then(response =>{
+                console.log(response)
+                setOutputSchedule(response.data)
+            })
+            .catch(error => {
+                console.log(error)
+            })  
+  }
 
   const classes = useStyles();
   return (
