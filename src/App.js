@@ -12,45 +12,49 @@ import { Button } from '@material-ui/core';
 import PostList from './components/PostList'
 import axios from 'axios'
 
-import { Grid } from '@material-ui/core'
+import { Grid , Box, CssBaseline, Container} from '@material-ui/core'
 import Header from './components/Header';
 import CustomCard from './components/CustomCard';
 import {makeStyles} from '@material-ui/styles';
 
+
 import Content from './components/Content'
+import ButtonContext from './Context/ButtonContext';
 const animatedComponents = makeAnimated();
 
 
 const useStyles = makeStyles({
   color: {
-    backgroundColor: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
     background: 'rgb(153,0,17)'
     }
 });
 
 function App() {
-
+  const [schedules, setSchedules] = useState([]);
   const classes = useStyles();
   return (
-    
-    <Grid container direction="column" spacing={2}>
-      <Grid item>
-      <Header/>
-      </Grid>
-      <Grid item container className={classes.color} >
-          <Grid item xs={0} sm={2} ></Grid>
-          <Grid item xs={12} sm={8}>
-          This is where the content will be This is where the content will be This is where the content will be
-          This is where the content will be This is where the content will be This is where the content will be
-          This is where the content will be This is where the content will be This is where the content will be
-          This is where the content will be This is where the content will be This is where the content will be
-          <CustomCard></CustomCard>
-          <Content> </Content>
+    <Box> <CssBaseline/>
+      <Grid container direction="column" justify="center" spacing={2}>
+        <Grid item>
+        <Header/>
+        </Grid>
+        <Grid item container className={classes.color} >
+            <Grid item xs={"auto"} sm={2} ></Grid>
+            <Grid item xs={12} sm={8} align="center">
+                <Content data={setSchedules} currentSchedules={schedules}>
+                </Content>
+            </Grid>
+            <Grid item xs={"auto"} sm={2} >  </Grid>
+        </Grid>
+        <Grid item container>
+          <Grid item xs={"auto"} sm={2} ></Grid>
+          <Grid item xs={"12"} sm={8} >
+            <CustomCard schedules={schedules}></CustomCard>
           </Grid>
-          <Grid item xs={0} sm={2}></Grid>
+          <Grid item xs={"auto"} sm={2} ></Grid>
+        </Grid>
       </Grid>
-    </Grid>
-    
+    </Box>
   );
 }
 

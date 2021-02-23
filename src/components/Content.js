@@ -7,22 +7,28 @@ import axios from 'axios'
 import makeAnimated from 'react-select/animated';
 import AsyncCreatable from 'react-select/async-creatable'
 import { Button } from '@material-ui/core';
-
+import { Grid , Container} from '@material-ui/core';
 const useStyles = makeStyles({
   root: {
-    minWidth: 275,
+    marginBottom: 20,
+    marginTop:100,
+  },
+  buttons: {
+    justifyContent: 'center',
   }
 });
 
 const animatedComponents = makeAnimated();
 
-export default function CustomCard() {
+
+
+export default function CustomCard(props) {
   const classes = useStyles();
   const [data, setData] = useState([]);
   const [selectedOption, setSelectedOption] = useState([]);
   const [myInputValue, setMyInputValue] = useState( "" );
   const [outputSchedule, setOutputSchedule] = useState( [] );
-  
+
   useEffect(() => {
     csv(myfile).then(setData);
     console.log("Loaded data");
@@ -48,36 +54,50 @@ export default function CustomCard() {
     });
   function generateSchedule()
   {
-
-    let mything = ["Math 10 " , "Span 10"]
-    axios.get("https://6wyc8n688h.execute-api.ap-southeast-1.amazonaws.com/dev/echo/main", { params: { message: mything } })
+    var query = map(selectedOption, function(d){
+        return d.value
+      })
+    console.log("sending")
+    console.log(query)
+    axios.get("https://6wyc8n688h.execute-api.ap-southeast-1.amazonaws.com/dev/echo/main", { params: { message: query } })
             .then(response =>{
                 console.log(response)
                 setOutputSchedule(response.data)
+                props.data([...props.currentSchedules , response.data] )
             })
             .catch(error => {
                 console.log(error)
-            })  
+            })
+      
+  }
+
+  const handleChange= (selectedOption) =>
+  {
+    setSelectedOption(selectedOption)
+    console.log("input changed!!")
+    console.log(selectedOption)
   }
 
   return (
-    <div style={{width:"90%", justifyContent:"center", display:"flex"}}>
-      <div className="App">
-        <h3 style={{color:"red"}}>CRS Class Scheduler</h3>
+    <Container>
+      <Grid container xs={12} spacing={2} direction="column" className={classes.root}>
+        <Grid item>
         <AsyncCreatable 
         cacheOptions 
         defaultOptions 
         loadOptions={promiseOptions}
         size ="large"
-        width='300px'
         isMulti 
-        
+        onChange={handleChange}
+        value={selectedOption}
         components={animatedComponents}
         />
-      <Button onClick={generateSchedule} variant="contained" color="primary" size="small" >  Go </Button>
+        </Grid>
+        <Grid item  align="center">
+        <Button id="btn-go" onClick={generateSchedule} className={classes.buttons} variant="contained" color="primary" size="large" >  Go </Button> 
+        </Grid>
+      </Grid>  
       
-
-      </div>
-    </div>
+      </Container>
   );
 }

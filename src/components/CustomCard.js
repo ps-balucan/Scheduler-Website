@@ -5,10 +5,12 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import { Grid , Container} from '@material-ui/core'
 
 const useStyles = makeStyles({
   root: {
-    minWidth: 275,
+    minWidth: 1000,
+    marginBottom : 5
   },
   bullet: {
     display: 'inline-block',
@@ -17,37 +19,33 @@ const useStyles = makeStyles({
   },
   title: {
     fontSize: 14,
+    justifyContent: "center"
   },
   pos: {
     marginBottom: 12,
   },
 });
 
-export default function CustomCard() {
+export default function CustomCard(props) {
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
 
   return (
-    <Card className={classes.root}>
-      <CardContent>
-        <Typography className={classes.title} color="textSecondary" gutterBottom>
-          Word of the Day
-        </Typography>
-        <Typography variant="h5" component="h2">
-          be{bull}nev{bull}o{bull}lent
-        </Typography>
-        <Typography className={classes.pos} color="textSecondary">
-          adjective
-        </Typography>
-        <Typography variant="body2" component="p">
-          well meaning and kindly.
-          <br />
-          {'"a benevolent smile"'}
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <Button size="small">Learn More</Button>
-      </CardActions>
-    </Card>
+    props.schedules.map((i) => (
+      <Container>
+          <Card variant="outlined" className={classes.root}>
+            <CardContent>
+              <Typography variant="body2" component="p">
+              {i}
+              </Typography>
+            </CardContent>
+            <CardActions>
+              <Button size="small">SHOW IN CALENDAR</Button>
+            </CardActions>
+          </Card>
+      </Container>
+    ))
+    
+
   );
 }
