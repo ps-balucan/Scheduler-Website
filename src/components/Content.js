@@ -67,6 +67,7 @@ export default function CustomCard(props) {
             })
             .catch(error => {
                 console.log(error)
+                props.data([...props.currentSchedules , ["Error: One of the subjects you input does not exist."]] )
             })
       
   }
