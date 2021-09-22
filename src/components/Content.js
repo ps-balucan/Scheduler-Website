@@ -10,11 +10,12 @@ import { Button } from '@material-ui/core';
 import { Grid , Container} from '@material-ui/core';
 const useStyles = makeStyles({
   root: {
-    marginBottom: 20,
-    marginTop:100,
+    marginTop: 20,
   },
   buttons: {
     justifyContent: 'center',
+    marginTop: 20,
+    marginBottom: 5,
   }
 });
 
@@ -26,8 +27,9 @@ export default function CustomCard(props) {
   const classes = useStyles();
   const [data, setData] = useState([]);
   const [selectedOption, setSelectedOption] = useState([]);
-  const [myInputValue, setMyInputValue] = useState( "" );
-  const [outputSchedule, setOutputSchedule] = useState( [] );
+  // const [myInputValue, setMyInputValue] = useState( "" );
+  // const [outputSchedule, setOutputSchedule] = useState( [] );
+  // const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     csv(myfile).then(setData);
@@ -41,33 +43,42 @@ export default function CustomCard(props) {
   console.log("Going here.");
   console.log(data)
 
+
+  //This makes the suggestions upon typing in the search  bar NOT case sensitive
   const filterOptions = (inputValue: string) => {
     return data.filter( i => 
       i.label.toLowerCase().includes(inputValue.toLowerCase())
       );
   };
+
+  //referenced in the asynccreatable below as load options
   const promiseOptions = inputValue =>
     new Promise(resolve => {
       setTimeout(() => {
         resolve(filterOptions(inputValue));
       }, 1000);
     });
+
+  //generate schedules by querying the api
   function generateSchedule()
   {
+    props.isLoading(true)
+    console.log("is loading: ")
     var query = map(selectedOption, function(d){
         return d.value
       })
-    console.log("sending")
     console.log(query)
     axios.get("https://6wyc8n688h.execute-api.ap-southeast-1.amazonaws.com/dev/echo/main", { params: { message: query } })
             .then(response =>{
                 console.log(response)
-                setOutputSchedule(response.data)
-                props.data([...props.currentSchedules , response.data] )
+                // setOutputSchedule(response.data)
+                props.data([response.data] )
+                props.isLoading(false)
             })
             .catch(error => {
                 console.log(error)
-                props.data([...props.currentSchedules , ["Error: One of the subjects you input does not exist."]] )
+                props.isLoading(false)
+                props.data([["Error: One of the subjects you input does not exist."]] )
             })
       
   }
@@ -80,25 +91,19 @@ export default function CustomCard(props) {
   }
 
   return (
-    <Container>
-      <Grid container xs={12} spacing={2} direction="column" className={classes.root}>
-        <Grid item>
-        <AsyncCreatable 
-        cacheOptions 
-        defaultOptions 
-        loadOptions={promiseOptions}
-        size ="large"
-        isMulti 
-        onChange={handleChange}
-        value={selectedOption}
-        components={animatedComponents}
-        />
-        </Grid>
-        <Grid item  align="center">
-        <Button id="btn-go" onClick={generateSchedule} className={classes.buttons} variant="contained" color="primary" size="large" >  Go </Button> 
-        </Grid>
-      </Grid>  
-      
-      </Container>
+    <>      
+      <AsyncCreatable 
+      cacheOptions 
+      defaultOptions 
+      loadOptions={promiseOptions}
+      size ="large"
+      isMulti 
+      onChange={handleChange}
+      value={selectedOption}
+      components={animatedComponents}
+      className={classes.root}
+      />    
+      <Button id="btn-go" onClick={generateSchedule} className={classes.buttons} variant="outlined" size="large" > Generate </Button>   
+    </>
   );
 }
