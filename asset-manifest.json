@@ -1,24 +1,23 @@
 {
   "files": {
-    "main.css": "/Scheduler-Website/static/css/main.8c8b27cf.chunk.css",
-    "main.js": "/Scheduler-Website/static/js/main.02696f06.chunk.js",
-    "main.js.map": "/Scheduler-Website/static/js/main.02696f06.chunk.js.map",
-    "runtime-main.js": "/Scheduler-Website/static/js/runtime-main.2688079c.js",
-    "runtime-main.js.map": "/Scheduler-Website/static/js/runtime-main.2688079c.js.map",
-    "static/js/2.2766370c.chunk.js": "/Scheduler-Website/static/js/2.2766370c.chunk.js",
-    "static/js/2.2766370c.chunk.js.map": "/Scheduler-Website/static/js/2.2766370c.chunk.js.map",
-    "static/js/3.95e1a8de.chunk.js": "/Scheduler-Website/static/js/3.95e1a8de.chunk.js",
-    "static/js/3.95e1a8de.chunk.js.map": "/Scheduler-Website/static/js/3.95e1a8de.chunk.js.map",
+    "main.css": "/Scheduler-Website/static/css/main.4406e2f8.chunk.css",
+    "main.js": "/Scheduler-Website/static/js/main.d77f9f2a.chunk.js",
+    "main.js.map": "/Scheduler-Website/static/js/main.d77f9f2a.chunk.js.map",
+    "runtime-main.js": "/Scheduler-Website/static/js/runtime-main.4a9bd0d8.js",
+    "runtime-main.js.map": "/Scheduler-Website/static/js/runtime-main.4a9bd0d8.js.map",
+    "static/js/2.9b186b43.chunk.js": "/Scheduler-Website/static/js/2.9b186b43.chunk.js",
+    "static/js/2.9b186b43.chunk.js.map": "/Scheduler-Website/static/js/2.9b186b43.chunk.js.map",
+    "static/js/3.bbb9f88e.chunk.js": "/Scheduler-Website/static/js/3.bbb9f88e.chunk.js",
+    "static/js/3.bbb9f88e.chunk.js.map": "/Scheduler-Website/static/js/3.bbb9f88e.chunk.js.map",
     "index.html": "/Scheduler-Website/index.html",
-    "static/css/main.8c8b27cf.chunk.css.map": "/Scheduler-Website/static/css/main.8c8b27cf.chunk.css.map",
-    "static/js/2.2766370c.chunk.js.LICENSE.txt": "/Scheduler-Website/static/js/2.2766370c.chunk.js.LICENSE.txt",
-    "static/media/classes.37a73850.csv": "/Scheduler-Website/static/media/classes.37a73850.csv",
-    "static/media/logo.6ce24c58.svg": "/Scheduler-Website/static/media/logo.6ce24c58.svg"
+    "static/css/main.4406e2f8.chunk.css.map": "/Scheduler-Website/static/css/main.4406e2f8.chunk.css.map",
+    "static/js/2.9b186b43.chunk.js.LICENSE.txt": "/Scheduler-Website/static/js/2.9b186b43.chunk.js.LICENSE.txt",
+    "static/media/classes.37a73850.csv": "/Scheduler-Website/static/media/classes.37a73850.csv"
   },
   "entrypoints": [
-    "static/js/runtime-main.2688079c.js",
-    "static/js/2.2766370c.chunk.js",
-    "static/css/main.8c8b27cf.chunk.css",
-    "static/js/main.02696f06.chunk.js"
+    "static/js/runtime-main.4a9bd0d8.js",
+    "static/js/2.9b186b43.chunk.js",
+    "static/css/main.4406e2f8.chunk.css",
+    "static/js/main.d77f9f2a.chunk.js"
   ]
 }
