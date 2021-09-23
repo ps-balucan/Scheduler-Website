@@ -15,7 +15,7 @@ const useStyles = makeStyles({
   buttons: {
     justifyContent: 'center',
     marginTop: 20,
-    marginBottom: 5,
+    marginBottom: 40,
   }
 });
 
